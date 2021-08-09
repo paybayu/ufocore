@@ -117,3 +117,48 @@ POST account
 }
 ```
 
+## Email validation (OTP)
+
+Before creating a new account the user provided email must be validated. "method" parameter can be 1 (email) or 2 (SMS).
+
+POST auth/otp
+
+```json
+{
+    "target": "juanperez@service2grow.com",
+    "method": 1
+}
+```
+
+Response: 
+
+```json
+{
+    "id": "1362"
+}
+```
+
+When the user receives the OTP code, his email can be validated as follows:
+
+POST auth/otp-verify
+
+```json
+{
+    "id": "1362",
+    "code": "82247",
+    "validate": 1
+}
+```
+
+Response:
+
+```json
+{
+    "status": "verified",
+    "validated": 1
+}
+```
+
+The account can now be created during the following 5 minutes while the validation is active.
+
+
