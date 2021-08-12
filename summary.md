@@ -102,6 +102,58 @@ Use the token by adding an Authorization header to every request:
 
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjgyMjkzMTQsImp0aSI6IjdBYU5naUM1cjM1elgzRVQ0MDlZRGRqTTUxdHQ4Y3Y5M1NRNlJmTEJcL1dFPSIsImlzcyI6Ind3dy5waW5wYWN1YmEuY29tIiwibmJmIjoxNjI4MjI5MzE0LCJleHAiOjE2MzAwMjkzMTQsImRhdGEiOnsiYWNjb3VudF9pZCI6ImJhYmE5ZGRkNzQ5YzQyYTI4ZGU4NjNhOWNiZjEzMTE1IiwibG9naW4iOiIiLCJkZXZpY2VfaWQiOiIiLCJjbGllbnRfaXAiOiIxLjEuMS4xIiwicm9sZXMiOltdfX0.VKil_NFjELA9dBpE2IfYaDpCkD-YKj4Nt82DypeddjE
 
+### Two factor authentication
+
+Users can choose to add an extra layer of security by using two factor authentication. This option is enabled by default for new accounts. In this scenario the user must provide on login a unique identifier for the device. Different browsers on the same computer are considered different devices. Smart phones APIs provide unique device IDs. In any case it is up to the user or application to provide a consistent unique alpha numeric ID for different devices.
+
+When the user attempts login and the provided device ID is not registered with the server, the API will return status code 401 Unauthorized and error code 1006, meaning "Extra verification required".
+
+```json
+{
+    "code": 1006,
+    "message": "Extra verification required",
+    "data": {
+        "email": "juanperez@pinpacuba.com",
+        "deviceId": "71be59fc4e81c01df0ea53651c6b6893"
+    }
+}
+```
+
+Then the application must require the user to validate his email combined with this new device, by executing a POST auth/otp request, which will send a code to the user's email.
+
+POST auth/otp
+
+```json
+{
+    "target": "juanperez@pinpacuba.com",
+    "method": 1,
+    "deviceId": "71be59fc4e81c01df0ea53651c6b6893"
+}
+```
+
+Response:
+
+```json
+{
+    "id": "1111"
+}
+```
+
+The API provides a shortcut to log in and validate the code with one request:
+
+POST auth/token
+
+```json
+{
+    "codeId": "1111",
+    "code": "37170",
+    "deviceId": "71be59fc4e81c01df0ea53651c6b6893",
+    "rememberDevice": 1
+}
+```
+
+This will return the same response as the original POST auth/token with the side effect of validating the account email combined with the new device.
+
 ## Create account (register)
 
 POST account
