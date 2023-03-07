@@ -216,23 +216,29 @@ The account can now be created during the following 5 minutes while the validati
 ## Upload image
 
 POST image
+
+```json
 {
     "folder": "pmedia"
 }
+```
 
 Response:
 
+```json
 {
     "id": "015cd218d3f744229327164ed792a2b8",
     "path": "public/amas/pmedia/015cd218d3f744229327164ed792a2b8.jpg",
     "mediaUrl": "https://core.service2grow.com/assets/public/amas/pmedia/015cd218d3f744229327164ed792a2b8.jpg",
     "tag": ""
 }
+```
 
 ## Create a product
 
 POST product-config
 
+```json
 {
     "id": "",
     "name": "Triciclo eléctrico rojo",
@@ -260,19 +266,24 @@ POST product-config
         "cfee5f60b398419681872e14bb1b0e87"
     ]
 }
+```
 
 Response
 
+```json
 {
     "message": "product-config created successfully",
     "id": "e1a68bcc39324eb7ac3c8f587dbef758",
 }
+```
 
 ## Update a product
 
 PATCH product-config
 
+```json
 {
     "id": "e1a68bcc39324eb7ac3c8f587dbef758",
     "price": 1550
 }
+```
