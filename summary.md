@@ -213,4 +213,66 @@ Response:
 
 The account can now be created during the following 5 minutes while the validation is active.
 
+## Upload image
 
+POST image
+{
+    "folder": "pmedia"
+}
+
+Response:
+
+{
+    "id": "015cd218d3f744229327164ed792a2b8",
+    "path": "public/amas/pmedia/015cd218d3f744229327164ed792a2b8.jpg",
+    "mediaUrl": "https://core.service2grow.com/assets/public/amas/pmedia/015cd218d3f744229327164ed792a2b8.jpg",
+    "tag": ""
+}
+
+## Create a product
+
+POST product-config
+
+{
+    "id": "",
+    "name": "Triciclo eléctrico rojo",
+    "description": "<p>Vehiculo el&eacute;ctrico para la transportaci&oacute;n de personas y carga.</p>\n<ul>\n<li>Ahorrador de energia</li>\n<li>Amplio espacio interior</li>\n<li>Amistoso con el planeta</li>\n</ul>\n<p>&nbsp;</p>",
+    "media": [
+        {
+            "imageId": "015cd218d3f744229327164ed792a2b8"
+        }
+    ],
+    "statusId": 1,
+    "isDigital": 0,
+    "price": 1500,
+    "pricingMethodId": 1,
+    "stockQuantity": 100,
+    "productWeight": 500,
+    "productLength": 500,
+    "productWidth": 200,
+    "productHeight": 300,
+    "shippingProfileId": 0,
+    "optionProperties": [],
+    "variants": [],
+    "variantProperties": [],
+    "providerId": 0,
+    "categories": [
+        "cfee5f60b398419681872e14bb1b0e87"
+    ]
+}
+
+Response
+
+{
+    "message": "product-config created successfully",
+    "id": "e1a68bcc39324eb7ac3c8f587dbef758",
+}
+
+## Update a product
+
+PATCH product-config
+
+{
+    "id": "e1a68bcc39324eb7ac3c8f587dbef758",
+    "price": 1550
+}
